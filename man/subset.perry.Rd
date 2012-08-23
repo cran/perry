@@ -1,0 +1,74 @@
+\name{subset.perry}
+\alias{subset.perry}
+\alias{subset.perrySelect}
+\title{Subsetting resampling-based prediction error results}
+\usage{
+  \method{subset}{perry} (x, select = NULL, ...)
+
+  \method{subset}{perrySelect} (x, subset = NULL,
+    select = NULL, ...)
+}
+\arguments{
+  \item{x}{an object inheriting from class \code{"perry"}
+  or \code{"perrySelect"} that contains prediction error
+  results.}
+
+  \item{subset}{a character, integer or logical vector
+  indicating the subset of models for which to keep the
+  prediction error results.}
+
+  \item{select}{a character, integer or logical vector
+  indicating the prediction error results to be extracted.}
+
+  \item{\dots}{currently ignored.}
+}
+\value{
+  An object similar to \code{x} containing just the
+  selected results.
+}
+\description{
+  Extract subsets of resampling-based prediction error
+  results.
+}
+\note{
+  Duplicate indices in \code{subset} or \code{select} are
+  removed such that all models and prediction error results
+  are unique.
+}
+\examples{
+data("coleman")
+set.seed(1234)  # set seed for reproducibility
+
+## set up folds for cross-validation
+folds <- cvFolds(nrow(coleman), K = 5, R = 10)
+
+## compare raw and reweighted LTS estimators for 
+## 50\% and 75\% subsets
+
+# 50\% subsets
+fit50 <- ltsReg(Y ~ ., data = coleman, alpha = 0.5)
+cv50 <- repCV(fit50, folds = folds, fit = "both", 
+    cost = rtmspe, trim = 0.1)
+
+# 75\% subsets
+fit75 <- ltsReg(Y ~ ., data = coleman, alpha = 0.75)
+cv75 <- repCV(fit75, folds = folds, fit = "both", 
+    cost = rtmspe, trim = 0.1)
+
+# combine results into one object
+cv <- perrySelect("0.5" = cv50, "0.75" = cv75)
+cv
+
+# extract reweighted LTS results with 50\% subsets
+subset(cv50, select = "reweighted")
+subset(cv, subset = c(TRUE, FALSE), select = "reweighted")
+}
+\author{
+  Andreas Alfons
+}
+\seealso{
+  \code{\link{perryFit}}, \code{\link{perrySelect}},
+  \code{\link{perryTuning}}, \code{\link{subset}}
+}
+\keyword{utilities}
+
