@@ -1,12 +1,13 @@
-9f061831bcb085e98b157729dc04ff01 *DESCRIPTION
+bc9d2f747a7b8681a46fc95efa2f0db9 *DESCRIPTION
 cf19581f3954db15bc293c1d3347ae3b *NAMESPACE
+5a4b6c9f8ac7b3979969af58ad70ef9d *NEWS
 c96cb5950013363f020d050281884154 *R/accessors.R
 cd5b2e2d940746d5a8510b9a660a589d *R/aggregate.R
 5926f5af9bbe58e9d7ff4de0a588780a *R/cost.R
 29f595672712b6726a33d198d0328be5 *R/fortify.R
 91287826a49be27d8ed47c5e91f1d240 *R/perry.R
 24af1fbfe363f4dfe5ac7cb5d91d2771 *R/perryFit.R
-ed147d405c83e04ae7840297e2cd207a *R/perryPlot.R
+023f8e323a18b4e0542bbf1ddbe1ad77 *R/perryPlot.R
 11213ba4969ee392eb69496506757ccd *R/perryReshape.R
 41363823ca50b3684ddd0c6d7e5442ab *R/perrySelect.R
 4d6ef0c6361b5e25a142dc11f6754dc7 *R/perrySplits.R
@@ -50,7 +51,7 @@ c2af3d32705c351332fd3e2d3a4989ab *man/aggregate.perry.Rd
 8b9ca30202de243a4eeb3f7add4b5a41 *man/cvFolds.Rd
 f70429383a4b4755cd01e3ec27dbead1 *man/foldControl.Rd
 58f50e79ffdf5937aa7152f905162735 *man/fortify.perry.Rd
-76ba62956bd8b39a549ba13c9217874c *man/perry-package.Rd
+a150e904216a3a75330c115f0b7f33d1 *man/perry-package.Rd
 4448278c1b92983ae20e9eba54400dee *man/perry.Rd
 63476bd170c3e7d93d30cd254a119901 *man/perryFit.Rd
 bdbe5972f558cbeb582a2494f015b182 *man/perryPlot.Rd
