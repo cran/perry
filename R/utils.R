@@ -1,16 +1,7 @@
-# ----------------------
+# --------------------------------------
 # Author: Andreas Alfons
-#         KU Leuven
-# ----------------------
-
-## utilities for prediction error functions
-
-## add intercept column to design matrix
-addIntercept <- function(x, check = FALSE) {
-    if(!check || all(is.na(match(c("Intercept","(Intercept)"), colnames(x))))) {
-        cbind("(Intercept)"=rep.int(1, nrow(x)), x)
-    } else x
-}
+#         Erasmus Universiteit Rotterdam
+# --------------------------------------
 
 # add default names for prediction error results
 addNames <- function(x) UseMethod("addNames")
@@ -100,7 +91,7 @@ defaultFitNames <- function(m) {
 ## call a function by either
 # 1) simply evaluating a supplied function for the basic arguments if there are
 #    no additional arguments in list format
-# 2) evaluating a supplied function with 'do.call' if there are additional 
+# 2) evaluating a supplied function with 'do.call' if there are additional
 #    arguments in list format
 doCall <- function(fun, ..., args = list()) {
     if(length(args) == 0) {
@@ -113,6 +104,7 @@ hasComponent <- function(x, name) name %in% names(x)
 
 # check if a generic function has a method for a certain class
 # function name needs to be supplied instead of the function itself
+#' @importFrom utils getS3method
 hasMethod <- function(fun, class) {
     !is.null(getS3method(fun, class, optional=TRUE))
 }
@@ -122,14 +114,6 @@ nobs.default <- function(object, ...) {
     n <- nrow(object)                   # matrix or data.frame
     if(is.null(n)) n <- length(object)  # vector
     n
-}
-
-## remove intercept column from design matrix
-removeIntercept <- function(x, pos) {
-    if(missing(pos)) {
-        pos <- match(c("Intercept","(Intercept)"), colnames(x), nomatch = 0)
-        if(any(pos > 0)) x[, -pos, drop=FALSE] else x
-    } else x[, -pos, drop=FALSE]
 }
 
 # find which bootstrap samples have all observations in the bag

@@ -1,9 +1,9 @@
-# ------------------------------------
+# --------------------------------------
 # Author: Andreas Alfons
-#         Erasmus University Rotterdam
-# ------------------------------------
+#         Erasmus Universiteit Rotterdam
+# --------------------------------------
 
-#' @S3method print cvFolds
+#' @export
 print.cvFolds <- function(x, ...) {
   # print general information
   cvText <- getPrefix(x)
@@ -26,7 +26,7 @@ print.cvFolds <- function(x, ...) {
   invisible(x)
 }
 
-#' @S3method print randomSplits
+#' @export
 print.randomSplits <- function(x, ...) {
   # print general information
   if(x$R == 1) {
@@ -46,7 +46,7 @@ print.randomSplits <- function(x, ...) {
   invisible(x)
 }
 
-#' @S3method print bootSamples
+#' @export
 print.bootSamples <- function(x, ...) {
   # print general information
   if(x$R == 1) {
@@ -66,9 +66,8 @@ print.bootSamples <- function(x, ...) {
   invisible(x)
 }
 
-#' @S3method print perry
-#' @S3method print summary.perry
-print.perry <- print.summary.perry <- function(x, ...) {
+#' @export
+print.perry <- function(x, ...) {
   # print cross-validation results
   cat(getPrefix(x$splits), "results:\n")
   print(x$pe, ...)
@@ -76,13 +75,18 @@ print.perry <- print.summary.perry <- function(x, ...) {
   invisible(x)
 }
 
-#' @S3method print perrySelect
-#' @S3method print summary.perrySelect
-print.perrySelect <- print.summary.perrySelect <- function(x, best = TRUE, ...) {
-  # print cross-validation results
-  cat("\n")
-  cat(getPrefix(x$splits), "results:\n")
-  print(x$pe, ...)
+#' @export
+print.summary.perry <- print.perry
+
+#' @export
+print.perrySelect <- function(x, results = TRUE,
+                                                           best = TRUE, ...) {
+  # print cross-validation results if requested
+  if(isTRUE(results)) {
+    cat("\n")
+    cat(getPrefix(x$splits), "results:\n")
+    print(x$pe, ...)
+  }
   # print optimal model if requested
   if(isTRUE(best)) {
     cat("\nBest model:\n")
@@ -96,14 +100,20 @@ print.perrySelect <- print.summary.perrySelect <- function(x, best = TRUE, ...) 
   invisible(x)
 }
 
-#' @S3method print perryTuning
-#' @S3method print summary.perryTuning
-print.perryTuning <- print.summary.perryTuning <- function(x, best = TRUE, 
+#' @export
+print.summary.perrySelect <- print.perrySelect
+
+#' @export
+print.perryTuning <- function(x, results = NULL,
+                                                           best = TRUE,
                                                            final = TRUE, ...) {
-  # print cross-validation results
-  cat("\n")
-  cat(getPrefix(x$splits), "results:\n")
-  print(cbind(x$tuning, x$pe[, -1, drop=FALSE]), ...)
+  # print cross-validation results if requested
+  if(is.null(results)) results <- nrow(x$pe) <= 10
+  if(isTRUE(results)) {
+    cat("\n")
+    cat(getPrefix(x$splits), "results:\n")
+    print(cbind(x$tuning, x$pe[, -1, drop=FALSE]), ...)
+  }
   # print optimal value for tuning parameters if requested
   if(isTRUE(best)) {
     if(ncol(x$tuning) == 1) cat("\nOptimal tuning parameter:\n")
@@ -121,6 +131,9 @@ print.perryTuning <- print.summary.perryTuning <- function(x, best = TRUE,
   # return object invisibly
   invisible(x)
 }
+
+#' @export
+print.summary.perryTuning <- print.perryTuning
 
 
 ## get prefix for print methods
