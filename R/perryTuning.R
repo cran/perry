@@ -200,6 +200,8 @@
 #' \code{\link{cvFolds}}, \code{\link{randomSplits}},
 #' \code{\link{bootSamples}}, \code{\link{cost}}
 #'
+#' @example inst/doc/examples/example-perryTuning.R
+#'
 #' @keywords utilities
 #'
 #' @export

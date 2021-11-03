@@ -92,6 +92,8 @@
 #'
 #' @seealso \code{\link{perryFit}}, \code{\link{perryTuning}}
 #'
+#' @example inst/doc/examples/example-perrySelect.R
+#'
 #' @keywords utilities
 #'
 #' @export
